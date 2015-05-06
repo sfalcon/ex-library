@@ -15,7 +15,7 @@ public class Book
 
     public String getDescription()
     {
-        return null;
+        return description;
     }
 
     public String getIsbn()
