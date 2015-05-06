@@ -11,7 +11,7 @@ public class BookServiceImplTest {
 
     @org.junit.Before
     public void setUp(){
-        bookService = new BookServiceImpl();
+        bookService = new BookServiceImpl(new BookRepositoryImpl());
     }
 
     @org.junit.Test
@@ -24,7 +24,7 @@ public class BookServiceImplTest {
             invalidText = e;
         }
 
-        assertEquals("ISBN must begin with \"ISBN\"", invalidText.getMessage());
+        assertEquals("ISBN must begin with \"ISBN-\"", invalidText.getMessage());
     }
 
     @org.junit.Test
