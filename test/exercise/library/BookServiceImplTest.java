@@ -3,7 +3,7 @@ package exercise.library;
 import static org.junit.Assert.*;
 
 /**
- * Created by nogard on 06/05/2015.
+ * Created by sfalcon on 06/05/2015.
  */
 public class BookServiceImplTest {
 
