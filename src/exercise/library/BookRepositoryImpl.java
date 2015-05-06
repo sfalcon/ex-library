@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class BookRepositoryImpl implements BookRepository {
     private static final String ISBN_PREFIX = "ISBN-";
-
     private static final String ISBN_DEATHLY_HALLOWS = ISBN_PREFIX + "001";
     private static final String ISBN_PLAYER_OF_GAMES = ISBN_PREFIX + "002";
     private static final String ISBN_GENIUS = ISBN_PREFIX + "003";
@@ -30,5 +29,9 @@ public class BookRepositoryImpl implements BookRepository {
 
     public Book retrieveBook(String isbn) {
         return books.get(isbn);
+    }
+
+    public String getIsbnPrefix(){
+        return this.ISBN_PREFIX;
     }
 }

@@ -14,7 +14,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book retrieveBook(String isbn) throws BookNotFoundException{
-        if (!isbn.startsWith("ISBN-"))
+        if (!inputIsValid(isbn))
             throw new IllegalArgumentException("ISBN must begin with \"ISBN-\"");
 
         Book retrieved = repository.retrieveBook(isbn);
@@ -27,7 +27,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public String getBookSummary(String isbn) throws BookNotFoundException {
-        return null;
+
+        // same needed validations already done in the called method
+        return retrieveBook(isbn).getDescription();
+    }
+
+    private boolean inputIsValid(String isbn){
+        return isbn.startsWith(repository.getIsbnPrefix());
     }
 }
 

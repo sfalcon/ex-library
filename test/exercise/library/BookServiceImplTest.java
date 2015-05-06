@@ -25,6 +25,14 @@ public class BookServiceImplTest {
         }
 
         assertEquals("ISBN must begin with \"ISBN-\"", invalidText.getMessage());
+
+        invalidText = new Exception("blank");
+        try{
+            bookService.getBookSummary("INVALID-TEXT");
+        }catch (Exception e){
+            invalidText = e;
+        }
+        assertEquals("ISBN must begin with \"ISBN-\"", invalidText.getMessage());
     }
 
     @org.junit.Test
@@ -33,9 +41,19 @@ public class BookServiceImplTest {
         Exception notFound = new Exception("blank");
         try{
             bookService.retrieveBook("ISBN-777");
-        }catch (Exception e){
+        }catch (Exception e) {
             notFound = e;
         }
+
+        assertEquals(BookNotFoundException.class, notFound.getClass());
+
+        notFound = new Exception("blank");
+        try{
+            bookService.getBookSummary("ISBN-777");
+        }catch (Exception e) {
+            notFound = e;
+        }
+
         assertEquals(BookNotFoundException.class, notFound.getClass());
     }
 
@@ -47,7 +65,13 @@ public class BookServiceImplTest {
     }
 
     @org.junit.Test
-    public void testGetBookSummary() throws Exception {
+    public void testValidSummary() throws Exception {
 
+        assertEquals("Sorcery and Magic.",
+                    bookService.getBookSummary("ISBN-001"));
+        assertEquals("Jernau Morat Gurgeh. The Player of Games. Master of every board, computer and strategy.",
+                    bookService.getBookSummary("ISBN-002"));
+        assertEquals("A brilliant interweaving of Richard Feynman's colourful life and a detailed and accessible account of his theories and experiments.",
+                    bookService.getBookSummary("ISBN-003"));
     }
 }
